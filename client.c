@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:41:59 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/15 21:05:37 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:32:03 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	ft_wrong_pid(void)
 	exit(0);
 }
 
-void	ft_send_byte(char ch, int pid)
+void	ft_send_byte(char byte, int pid)
 {
 	int	i;
 	int	kill_res;
 
-	kill = 0;
+	kill_res = 0;
 	i = 7;
 	while (i >= 0)
 	{
@@ -40,7 +40,7 @@ void	ft_send_byte(char ch, int pid)
 	}
 }
 
-void	ft_send_message(*msg, int pid)
+void	ft_send_message(char *msg, int pid)
 {
 	while (*msg)
 	{
@@ -62,7 +62,7 @@ int	main(int argc, char *argv[])
 	int	pid;
 
 	g_msg = 0;
-	signal(SIGUSR1, ft_sighandler);
+	signal(SIGUSR1, message_receive);
 	if (argc != 3)
 	{
 		ft_putstr_fd("Wrong amount of arguments", 2);
@@ -73,6 +73,6 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Message is empty", 2);
 	ft_send_message(argv[2], pid);
 	if (g_msg == 0)
-		sleep(INT_MAX);
+		sleep(2147483647);
 	return (0);
 }

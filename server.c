@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:42:02 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/15 21:18:03 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:29:02 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	init_temp_state(void)
 	g_temp_state.prog_char = 0;
 }
 
-void	ft_sighandler(int sig, siginfo_t *info, void *uncotext)
+void	message_receive(int sig, siginfo_t *info, void *uncotext)
 {
 	int	bit;
 
-	(void)uncontext;
+	(void)uncotext;
 	bit = sig - SIGUSR1;
 	if (info->si_pid != g_temp_state.client_pid)
 		init_temp_state();
@@ -34,7 +34,7 @@ void	ft_sighandler(int sig, siginfo_t *info, void *uncotext)
 	if (g_temp_state.i == 8)
 	{
 		if (!g_temp_state.prog_char)
-			kill(g_msg.client, SIGUSR1);
+			kill(g_temp_state.client_pid, SIGUSR1);
 		ft_putstr_fd(g_temp_state.prog_char, 1);
 		init_temp_state();
 	}
@@ -46,7 +46,7 @@ int	main(void)
 
 	printf("Server's PID is: %d\n", getpid());
 	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = &ft_sighandler;
+	sa.sa_sigaction = &message_receive;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)

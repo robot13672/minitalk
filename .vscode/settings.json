@@ -1,0 +1,14 @@
+{
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/ikhristi/core/minitalk_1.1",
+			"binaryPath": "/Users/ikhristi/core/minitalk_1.1/server",
+			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/ikhristi/core/minitalk_1.1",
+			"binaryPath": "/Users/ikhristi/core/minitalk_1.1/client",
+			"binaryArgs": []
+		}
+	]
+}

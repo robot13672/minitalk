@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:41:59 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/16 12:32:03 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:48:47 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_send_byte(char byte, int pid)
 		if (byte >> i & 1)
 			kill_res = kill(pid, SIGUSR2);
 		else
-			kill_res = Kill(pid, SIGUSR1);
+			kill_res = kill(pid, SIGUSR1);
 		if (kill_res == -1)
 			ft_wrong_pid();
 		usleep(100);
@@ -62,7 +62,7 @@ int	main(int argc, char *argv[])
 	int	pid;
 
 	g_msg = 0;
-	signal(SIGUSR1, message_receive);
+	signal(SIGUSR1, ft_receive_message);
 	if (argc != 3)
 	{
 		ft_putstr_fd("Wrong amount of arguments", 2);

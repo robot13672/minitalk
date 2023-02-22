@@ -6,7 +6,7 @@
 /*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:12:04 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/12 20:28:37 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:47:25 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/signal.h>
 
 typedef struct s_temp_state{
-	int		i;
+	uint8_t	i;
 	char	prog_char;
 	int		client_pid;
 }t_temp_state;

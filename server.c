@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:42:02 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/16 12:29:02 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:37:01 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	init_temp_state(void)
 	g_temp_state.prog_char = 0;
 }
 
-void	message_receive(int sig, siginfo_t *info, void *uncotext)
+void	message_receive(int sig, siginfo_t *info, void *ucontext)
 {
 	int	bit;
 
-	(void)uncotext;
+	(void)ucontext;
 	bit = sig - SIGUSR1;
 	if (info->si_pid != g_temp_state.client_pid)
 		init_temp_state();
@@ -35,7 +35,7 @@ void	message_receive(int sig, siginfo_t *info, void *uncotext)
 	{
 		if (!g_temp_state.prog_char)
 			kill(g_temp_state.client_pid, SIGUSR1);
-		ft_putstr_fd(g_temp_state.prog_char, 1);
+		ft_putchar_fd(g_temp_state.prog_char, 1);
 		init_temp_state();
 	}
 }
@@ -50,5 +50,5 @@ int	main(void)
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-		usleep(1);
+		pause();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:42:02 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/22 18:37:01 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:07:57 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,18 @@ void	message_receive(int sig, siginfo_t *info, void *ucontext)
 		ft_putchar_fd(g_temp_state.prog_char, 1);
 		init_temp_state();
 	}
+	g_temp_state.client_pid = info->si_pid;
 }
 
 int	main(void)
 {
 	struct sigaction	sa;
 
-	printf("Server's PID is: %d\n", getpid());
+	ft_printf("Server's PID is: %d\n", getpid());
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = &message_receive;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-		pause();
+		usleep(1);
 }

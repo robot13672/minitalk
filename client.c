@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:41:59 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/20 16:48:47 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:22:15 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void	ft_send_byte(char byte, int pid)
 			kill_res = kill(pid, SIGUSR1);
 		if (kill_res == -1)
 			ft_wrong_pid();
-		usleep(100);
+		if (usleep(100) == -1)
+        {
+            ft_putstr_fd("usleep error", 2);
+            exit(1);
+        }
 		i--;
 	}
 }
@@ -55,6 +59,7 @@ void	ft_receive_message(int sig)
 	if (sig == SIGUSR1)
 		ft_printf("Message from server was received\n");
 	g_msg = 1;
+	exit(0);
 }
 
 int	main(int argc, char *argv[])

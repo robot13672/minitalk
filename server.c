@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:42:02 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/23 19:07:57 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:55:46 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	message_receive(int sig, siginfo_t *info, void *ucontext)
 	{
 		if (!g_temp_state.prog_char)
 			kill(g_temp_state.client_pid, SIGUSR1);
-		ft_putchar_fd(g_temp_state.prog_char, 1);
+		write(1, &g_temp_state.prog_char, 1);
 		init_temp_state();
 	}
 	g_temp_state.client_pid = info->si_pid;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 14:53:41 by ikhristi          #+#    #+#              #
-#    Updated: 2023/02/16 12:30:38 by ikhristi         ###   ########.fr        #
+#    Updated: 2023/02/24 18:07:05 by ikhristi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,8 @@ bonus: all
 
 clean:
 	@rm -rf $(OBJS_DIR)
+	@rm -f $(CLIENT)
+	@rm -f $(SERVER)
 	@make fclean -C $(LIBFT)
 	@make fclean -C $(PRINTF)
 

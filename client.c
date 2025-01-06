@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:41:59 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/02/23 19:22:15 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:11:17 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	ft_send_byte(char byte, int pid)
 			kill_res = kill(pid, SIGUSR1);
 		if (kill_res == -1)
 			ft_wrong_pid();
-		if (usleep(100) == -1)
-        {
-            ft_putstr_fd("usleep error", 2);
-            exit(1);
-        }
+		if (usleep(300) == -1)
+		{
+			ft_putstr_fd("usleep error", 2);
+			exit(1);
+		}
 		i--;
 	}
 }
